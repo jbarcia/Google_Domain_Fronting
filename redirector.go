@@ -72,7 +72,7 @@ func init() {
 	// proxy
 	// proxy
 	proxy := &Prox{}
-	proxy = New("http://192.81.213.231/")
+	proxy = New("https://tisdale-group.com/")
 
 	// server
 	http.HandleFunc("/", proxy.handle)
