@@ -19,8 +19,8 @@ import (
 
 // app engine libs
 import (
-	"appengine"
-	"appengine/urlfetch"
+	"google.golang.org/appengine"
+	"google.golang.org/appengine/urlfetch"
 )
 
 // onExitFlushLoop is a callback set by tests to detect the state of the
