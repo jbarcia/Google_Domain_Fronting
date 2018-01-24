@@ -34,13 +34,17 @@ func main() {
 	defaulRedirect := flag.String("dr", "https://google.com", "")
 	c2url := flag.String("c2", "", "")
 	newProject := flag.Bool("new", false, "")
+	c2profile := flag.String("cp", "", "")
+	c2out := flag.String("co", *c2profile+"2", "")
+	keystore := flag.String("ks", "", "")
+	keystorePass := flag.String("kp", "", "")
 	flag.Usage = func() {
 		fmt.Println(usage)
 	}
 	flag.Parse()
 
 	result, url := google.CreateRedirector(*projectName, *restrictedUA, *restrictedSubnet, *restrictedHeader,
-		*defaulRedirect, *c2url, *newProject, *projectDir)
+		*defaulRedirect, *c2url, *newProject, *projectDir, *c2profile, *c2out, *keystore, *keystorePass)
 	if result {
 		fmt.Println(url)
 	} else {
