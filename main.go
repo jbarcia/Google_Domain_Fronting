@@ -21,7 +21,8 @@ Options:
   -dr             Default redirect that will occur if a restricted condition is not met (Default: https://google.com)
   -rs             Restrict proxying requests to this subnet
   -ru             Restrict proxying requests to this User Agent
-  -rh             Restrict proxying requests to this header (Not functional)
+  -rh             Restrict proxying requests to this header name
+  -rv			  Restrict proxying requests to this header value
 `
 )
 
