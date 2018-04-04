@@ -26,6 +26,7 @@ Options:
 `
 )
 
+//TODO: Make C2 Profile Writing Better
 func main() {
 	projectName := flag.String("pn", "", "")
 	projectDir := flag.String("pd", "./gae", "")
@@ -49,6 +50,6 @@ func main() {
 	if result {
 		fmt.Println(url)
 	} else {
-		fmt.Println("Something went wrong")
+		fmt.Println("Something went wrong - Look Above")
 	}
 }

