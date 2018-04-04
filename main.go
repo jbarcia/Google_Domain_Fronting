@@ -4,7 +4,7 @@ import (
 	"flag"
 	"fmt"
 
-	"github.com/rmikehodges/SneakyVulture/google"
+	"github.com/rmikehodges/hideNsneak/google"
 )
 
 const (
